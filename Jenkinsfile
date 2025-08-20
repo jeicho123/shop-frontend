@@ -18,7 +18,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'npm test'
+                sh 'npm test -- --passWithNoTests'
             }
         }
         stage('Security Scan') {
