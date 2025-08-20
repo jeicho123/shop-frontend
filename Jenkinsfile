@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    tools {
+        nodejs "NodeJS"
+    }
+
     environment {
         IMAGE_NAME = 'jeicho123/shop-frontend'
     }
