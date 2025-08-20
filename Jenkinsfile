@@ -1,10 +1,14 @@
 pipeline {
     agent any
 
+    environment {
+        IMAGE_NAME = 'jeicho123/shop-frontend'
+    }
+
     stages {
-        stage('Hello') {
+        stage('Build image') {
             steps {
-                echo 'Hello World'
+                sh "docker build -t ${IMAGE_NAME}:latest ."
             }
         }
     }
