@@ -47,5 +47,36 @@ pipeline {
                 }
             }
         }
+
+        stage('Deploy to Dev') {
+            when {
+                branch 'develop'
+            }
+            steps {
+                echo "Deploying to DEV environment..."
+                // kubectl apply -f k8s/dev.yaml
+            }
+        }
+
+        stage('Deploy to Staging') {
+            when {
+                branch pattern: "release/.*", comparator: "REGEXP"
+            }
+            steps {
+                echo "Deploying to STAGING environment..."
+                // kubectl apply -f k8s/staging.yaml
+            }
+        }
+
+        stage('Deploy to Prod') {
+            when {
+                branch 'main'
+            }
+            steps {
+                input message: "Deploy to PROD?", ok: "Yes, deploy"
+                echo "Deploying to PROD environment..."
+                // kubectl apply -f k8s/prod.yaml
+            }
+        }
     }
 }
